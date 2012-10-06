@@ -30,44 +30,44 @@ class Voter(object):
 
             if self.state == 0:
                 self.connection.api.find_and_modify(
-                    query={"user_id":user_id},
-                    update={"user_id":user_id,"state":1,"geographic_state":None},
+                    query={"user_id":self.user_id},
+                    update={"user_id":self.user_id,"state":1,"geographic_state":None},
                     upsert=True)
                 tropo = Tropo()
-                tropo.say("Hello, %s! What state do you live in?" % user_id)
+                tropo.say("Hello, %s! What state do you live in?" % self.user_id)
                 return tropo.RenderJson()
 
             if self.state == 1:
                 self.connection.api.find_and_modify(
-                    query={"user_id":user_id},
-                    update={"user_id":user_id,"state":2,"geographic_state":sms_text},
+                    query={"user_id":self.user_id},
+                    update={"user_id":self.user_id,"state":2,"geographic_state":self.sms_text},
                     upsert=True)
                 tropo = Tropo()
-                tropo.say("Hi, %s! Are you registered to vote in %s?" % (user_id, sms_text))
+                tropo.say("Hi, %s! Are you registered to vote in %s?" % (self.user_id, self.sms_text))
                 return tropo.RenderJson()
 
             if self.state == 2:
                 tropo = Tropo()
                 
-                if "y" in sms_text.lower():
+                if "y" in self.sms_text.lower():
                     # This is where we check if you have a driver license.
                     self.connection.api.find_and_modify(
-                        query={"user_id":user_id},
-                        update={"user_id":user_id,"state":0, "geographic_state":None},
+                        query={"user_id":self.user_id},
+                        update={"user_id":self.user_id,"state":0, "geographic_state":None},
                         upsert=True)
-                    tropo.say("Congratulations, %s! You can vote! Call (555) 555-5555 for more information." % user_id)
+                    tropo.say("Congratulations, %s! You can vote! Call (555) 555-5555 for more information." % self.user_id)
                 
-                elif "n" in sms_text.lower():
+                elif "n" in self.sms_text.lower():
                     # This is where we check if the voter registration has passed.
                     self.connection.api.find_and_modify(
-                        query={"user_id":user_id},
-                        update={"user_id":user_id,"state":0, "geographic_state":None},
+                        query={"user_id":self.user_id},
+                        update={"user_id":self.user_id,"state":0, "geographic_state":None},
                         upsert=True)
-                    tropo.say("Your voter registration date has passed, %s. We has a sad." % user_id)
+                    tropo.say("Your voter registration date has passed, %s. We has a sad." % self.user_id)
                 
                 else:
                     # We didn't get a yes or a no from the user.
-                    tropo.say("We didn't understand your response, %s. Please respond with yes or no." % user_id)
+                    tropo.say("We didn't understand your response, %s. Please respond with yes or no." % self.user_id)
                 
                 return tropo.RenderJson()
 
