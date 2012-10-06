@@ -16,7 +16,7 @@ def download_csv():
     file_names = [link.attrs['href'] for link in soup.findAll(class_='file') 
                   if 'voter_id' in link.attrs['href']]
 
-    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data')
+    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/rotr')
     for fname in file_names:
         target = os.path.join(data_dir, fname)
         urllib.urlretrieve(url + fname, target)
