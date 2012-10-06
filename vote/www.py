@@ -91,7 +91,7 @@ def vote():
 
         if state == 0:
             tropo = Tropo()
-            tropo.say("Hello! What state do you live in?")
+            tropo.say("Hello, %s! What state do you live in?" % user_id)
             connection.api.find_and_modify(
                 query={"user_id":user_id},
                 update={"user_id":user_id,"state":1, "geographic_state":None},
@@ -105,7 +105,7 @@ def vote():
                 update={"state":2,"geographic_state":sms_text},
                 upsert=True)
             tropo = Tropo()
-            tropo.say("Are you registered to vote in %s?" % sms_text)
+            tropo.say("Hi, %s! Are you registered to vote in %s?" % (user_id, sms_text))
             return tropo.RenderJson()
 
         if state == 2:
@@ -117,7 +117,7 @@ def vote():
                     query={"user_id":user_id},
                     update={"state":0, "geographic_state":None},
                     upsert=True)
-                tropo.say("Congratulations! You can vote! Call (555) 555-5555 for more information.")
+                tropo.say("Congratulations, %s! You can vote! Call (555) 555-5555 for more information." % user_id)
 
             elif "n" in sms_text.lower():
                 # This is where we check if the voter registration has passed.
@@ -125,11 +125,11 @@ def vote():
                     query={"user_id":user_id},
                     update={"state":0, "geographic_state":None},
                     upsert=True)
-                tropo.say("Your voter registration date has passed. We has a sad.")
+                tropo.say("Your voter registration date has passed, %s. We has a sad." % user_id)
 
             else:
                 # We didn't get a yes or a no from the user.
-                tropo.say("We didn't understand your response. Please respond with yes or no.")
+                tropo.say("We didn't understand your response, %s. Please respond with yes or no." % user_id)
 
             return tropo.RenderJson()
 
