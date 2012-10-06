@@ -13,8 +13,9 @@ from vote.libs.states import STATES, STATES_BY_SLUG, STATE_SLUGS_REGEX
 
 def load_voter_id_rules():
     print STATE_SLUGS_REGEX
-    data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data/rotr')
-    cnx = sqlite3.connect(os.path.join(data_dir, 'canivote2.sqlite'))
+    sqlite_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data')
+    data_dir = os.path.join(sqlite_dir, 'rotr')
+    cnx = sqlite3.connect(os.path.join(sqlite_dir, 'canivote.sqlite'))
     cursor = cnx.cursor()
     # Create rules table if it doesn't exist
     try:
@@ -45,7 +46,6 @@ def load_voter_id_rules():
                                 row['voter_identification_id'],
                                 row['voter_identification_name']))
 
-    #import pdb;pdb.set_trace()
     cursor.executemany(INSERT, payload)
     cnx.commit()
     cnx.close()

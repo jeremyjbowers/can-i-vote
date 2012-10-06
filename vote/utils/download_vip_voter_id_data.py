@@ -7,9 +7,6 @@ import csv
 import os
 import urllib
 
-#from states import STATES
-#import pdb;pdb.set_trace()
-
 def download_csv():
     url = "http://data.votinginfoproject.org/rotr/CSV/"
     soup = BeautifulSoup(urllib.urlopen(url).read())
@@ -23,5 +20,4 @@ def download_csv():
         print "Downloaded %s" % target
 
 if __name__ == '__main__':
-    #main()
     download_csv()
