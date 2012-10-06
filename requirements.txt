@@ -1,5 +1,5 @@
 Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
--e git+git@github.com:tropo/tropo-webapi-python.git@ed534ded2976e0e0deb85b618d21435523c24a3a#egg=tropo_webapi_python-dev
+-e git+https://github.com/tropo/tropo-webapi-python.git#egg=tropo
 wsgiref==0.1.2
