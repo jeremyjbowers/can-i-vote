@@ -27,9 +27,37 @@ def state_0():
 def homepage():
     return """
 <html>
-    <body style="color:#fdf6e3;background-color:#002b36;font-size:64px;font-family:Helvetica,'Helvetica',sans-serif;margin:20px auto;width:1024px;display:block;text-align:center;">
-        <h1 style="font-size:128px;">Can I vote?</h1>
-        <p>Text <code style="color:#d33682;font-weight:bold;">vote</code> to 2274.</p>
+    <head>
+    <style type="text/css">
+        * {
+            margin:0;
+            padding:0;
+            font-size:64px;
+        }
+        body {
+            color:#fdf6e3;
+            background-color:#002b36;
+            font-size:64px;
+            font-family:Helvetica,'Helvetica',sans-serif;
+            margin:20px auto;
+            min-width:320px;
+            max-width:1024px;
+            display:block;
+            text-align:center;
+        }
+        a {
+            font-weight:bold;
+            color:#cb4b16;
+            text-decoration:none;
+        }
+        code {
+            color:#d33682;
+            font-weight:bold;
+        }
+    </style>
+    </head>
+    <body>
+        <p>Text <code>vote</code> to <a href="sms:+12027385185">(202) 738-5185</a>.</p>
     </body>
 </html>
 """
