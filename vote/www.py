@@ -2,19 +2,16 @@
 
 from flask import Flask
 from flask import render_template, request
+from tropo import Tropo
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET'])
-def jason_sucks():
-    """
-    Tell the world about Jason.
-    """
+@app.route('/sms.json', methods=['GET'])
+def state_0():
+    tropo = Tropo()
+    tropo.say("Hello, World")
+    return tropo.RenderJson()
 
-    return """
-        <html>
-            <body>
-                <h1>JASON FUCKING SUCKS</h1>
-            </body>
-        </html>
-    """
+@app.route('/', methods=['GET'])
+def homepage():
+    return "<html><body>Can I vote? Text <code>can i vote</code> to 2274</body></html>"
