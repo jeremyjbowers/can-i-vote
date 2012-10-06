@@ -58,14 +58,14 @@ def vote():
             tropo.say("Hello, %s! What state do you live in?" % user_id)
             connection.api.find_and_modify(
                 query={"user_id":user_id},
-                update={"user_id":user_id,"state":1, "geographic_state":None},
+                update={"user_id":user_id,"state":1,"geographic_state":None},
                 upsert=True)
             return tropo.RenderJson()
 
         if state == 1:
             connection.api.find_and_modify(
                 query={"user_id":user_id},
-                update={"state":2,"geographic_state":sms_text},
+                update={"user_id":user_id,"state":2,"geographic_state":sms_text},
                 upsert=True)
             tropo = Tropo()
             tropo.say("Hi, %s! Are you registered to vote in %s?" % (user_id, sms_text))
@@ -73,23 +73,27 @@ def vote():
 
         if state == 2:
             tropo = Tropo()
+            
             if "y" in sms_text.lower():
                 # This is where we check if you have a driver license.
                 connection.api.find_and_modify(
                     query={"user_id":user_id},
-                    update={"state":0, "geographic_state":None},
+                    update={"user_id":user_id,"state":0, "geographic_state":None},
                     upsert=True)
                 tropo.say("Congratulations, %s! You can vote! Call (555) 555-5555 for more information." % user_id)
+            
             elif "n" in sms_text.lower():
                 # This is where we check if the voter registration has passed.
                 connection.api.find_and_modify(
                     query={"user_id":user_id},
-                    update={"state":0, "geographic_state":None},
+                    update={"user_id":user_id,"state":0, "geographic_state":None},
                     upsert=True)
                 tropo.say("Your voter registration date has passed, %s. We has a sad." % user_id)
+            
             else:
                 # We didn't get a yes or a no from the user.
                 tropo.say("We didn't understand your response, %s. Please respond with yes or no." % user_id)
+            
             return tropo.RenderJson()
 
         if state == None:
