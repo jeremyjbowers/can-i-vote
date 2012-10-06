@@ -86,7 +86,7 @@ class Voter(object):
         Get this user and determine their state.
         """
         # Find this user.
-        state = self.connection.api.find_one("user_id":self.user_id)
+        state = self.connection.api.find_one({"user_id":self.user_id})
 
         # If they have a state, return it. Otherwise, return nothing.
         if state:
