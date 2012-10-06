@@ -6,8 +6,8 @@ from tropo import Tropo
 
 app = Flask(__name__)
 
-@app.route('/sms.json', methods=['GET'])
-def state_0():
+@app.route('/helloworld.json', methods=['GET'])
+def hello():
     tropo = Tropo()
     tropo.say("Hello, World")
     return tropo.RenderJson()
