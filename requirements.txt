@@ -1,0 +1,3 @@
+flask
+-e git+git@github.com:tropo/tropo-webapi-python.git#egg=tropo
+csvkit
