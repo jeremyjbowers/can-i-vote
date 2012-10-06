@@ -46,7 +46,7 @@ template = """
 </html>
 """
 
-@app.route('/helloworld.json', methods=['GET'])
+@app.route('/helloworld.json', methods=['GET', 'POST'])
 def hello():
     tropo = Tropo()
     tropo.say("Hello, World")
@@ -112,7 +112,7 @@ def vote():
             tropo = Tropo()
 
             if "y" in sms_text.lower():
-                tropo.say("We didn't understand your response. Please respond with yes or no." % geographic_state)
+                tropo.say("Congratulations! You can vote! Call (555) 555-5555 for more information.")
 
             elif "n" in sms_text.lower():
                 connection.api.find_and_modify(
@@ -120,7 +120,7 @@ def vote():
                     update={"user_id":user_id,"state":2, "geographic_state":geographic_state},
                     upsert=True)
             else:
-                tropo.say("We didn't understand your response. Please respond with yes or no." % geographic_state)
+                tropo.say("We didn't understand your response. Please respond with yes or no.")
 
             return tropo.RenderJson()
 
