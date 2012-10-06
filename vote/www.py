@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import os
 
 from flask import Flask
 from flask import render_template, request
@@ -7,17 +8,20 @@ import json
 
 app = Flask(__name__)
 
+
 @app.route('/helloworld.json', methods=['GET'])
 def hello():
     tropo = Tropo()
     tropo.say("Hello, World")
     return tropo.RenderJson()
 
+
 @app.route('/state0.json', methods=['GET'])
 def state_0():
     tropo = Tropo()
     tropo.ask(choices="[ANY]", say="Ahoy-hoy! Tell us, what state do you live in?", timeout=60)
     return tropo.RenderJson()
+
 
 @app.route('/', methods=['GET'])
 def homepage():
@@ -29,3 +33,8 @@ def homepage():
     </body>
 </html>
 """
+
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
