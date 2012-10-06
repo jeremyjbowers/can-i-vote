@@ -4,3 +4,5 @@ Jinja2==2.6
 Werkzeug==0.8.3
 -e git+https://github.com/tropo/tropo-webapi-python.git#egg=tropo
 wsgiref==0.1.2
+-e git+https://github.com/washingtonpost/django-mongolier.git#egg=mongolier
+requests
