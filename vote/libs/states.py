@@ -57,3 +57,13 @@ STATES = {
     'WV': 'West Virginia',
     'WY': 'Wyoming'
 }
+
+def states_by_name_slug():
+    states = {} 
+    for postal, state in STATES.items():
+        slug = state.lower().replace(' ', '_')
+        states[slug]=postal
+    return states
+
+STATES_BY_SLUG = states_by_name_slug()
+STATE_SLUGS_REGEX = "|".join(STATES_BY_SLUG.keys())
