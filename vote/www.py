@@ -115,7 +115,7 @@ def vote():
                 # This is where we check if you have a driver license.
                 connection.api.find_and_modify(
                     query={"user_id":user_id},
-                    update={"state":3},
+                    update={"state":0, "geographic_state":None},
                     upsert=True)
                 tropo.say("Congratulations! You can vote! Call (555) 555-5555 for more information.")
 
