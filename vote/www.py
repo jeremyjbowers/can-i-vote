@@ -9,43 +9,6 @@ from mongolier import Connection
 
 app = Flask(__name__)
 
-template = """
-<html>
-    <head>
-    <style type="text/css">
-        * {
-            margin:0;
-            padding:0;
-            font-size:64px;
-        }
-        body {
-            color:#fdf6e3;
-            background-color:#002b36;
-            font-size:64px;
-            font-family:Helvetica,'Helvetica',sans-serif;
-            margin:20px auto;
-            min-width:320px;
-            max-width:1024px;
-            display:block;
-            text-align:center;
-        }
-        a {
-            font-weight:bold;
-            color:#cb4b16;
-            text-decoration:none;
-        }
-        code {
-            color:#d33682;
-            font-weight:bold;
-        }
-    </style>
-    </head>
-    <body>
-        <p>Text <code>vote</code> to <a href="sms:+12027385185">(202) 738-5185</a>.</p>
-    </body>
-</html>
-"""
-
 @app.route('/helloworld.json', methods=['GET', 'POST'])
 def hello():
     tropo = Tropo()
@@ -78,7 +41,8 @@ def vote():
             return 0
 
     if request.method == "GET":
-        return template
+        context = {}
+        return render_template('index.html', **context)
 
     if request.method == "POST":
         data = get_request(request)
@@ -140,7 +104,8 @@ def vote():
 
 @app.route('/', methods=['GET'])
 def homepage():
-    return template
+    context = {}
+    return render_template('index.html', **context)
 
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
