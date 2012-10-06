@@ -9,7 +9,6 @@ from mongolier import Connection
 
 app = Flask(__name__)
 
-<<<<<<< HEAD
 template = """
 <html>
     <head>
