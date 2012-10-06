@@ -15,3 +15,6 @@ def state_0():
 @app.route('/', methods=['GET'])
 def homepage():
     return "<html><body>Can I vote? Text <code>can i vote</code> to 2274</body></html>"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=True)
