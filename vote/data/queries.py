@@ -16,7 +16,7 @@ class QueryAPI(object):
 
     def __init__(self):
         self.sqlite_db = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'db.sqlite')
-        self.engine = create_engine('sqlite:///db.sqlite')
+        self.engine = create_engine('sqlite:///%s' % self.sqlite_db)
         self.meta = MetaData()
         self.meta.reflect(bind=self.engine)
 
@@ -32,7 +32,6 @@ class QueryAPI(object):
         # Short circuit if state is North Dakota, which has no registration deadline
         if state == 'ND':
             return False
-        #import pdb;pdb.set_trace()
         deadline = self.engine.execute(query).fetchone()[0]
         
         if deadline < datetime.date.today():
@@ -40,7 +39,13 @@ class QueryAPI(object):
         else:
             return False
 
-    def state_election_agency_phone(self, state):
-        pass
+    def elec_agency_phone(self, state):
+        """
+        >>> from vote.data import api
+        >>> api.elec_agency_phone('CA')
+        """
+        tbl = self.meta.tables['voting_cal']
+        query = select([tbl.c.sos_phone], tbl.c.state_postal == state)
+        return self.engine.execute(query).fetchone()[0]
 
 api = QueryAPI()
