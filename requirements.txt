@@ -1,11 +1,10 @@
-Fabric==1.4.3
 Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
-pycrypto==2.6
+-e git+https://github.com/washingtonpost/django-mongolier.git@2b7960a10c6ae7b798c41d92e140aa81564f7c9a#egg=django_mongolier-dev
+mock==1.0b1
+nose==1.2.1
 pymongo==2.3
 requests==0.14.1
-ssh==1.7.14
+-e git+https://github.com/tropo/tropo-webapi-python.git@ed534ded2976e0e0deb85b618d21435523c24a3a#egg=tropo_webapi_python-dev
 wsgiref==0.1.2
--e git+https://github.com/tropo/tropo-webapi-python.git#egg=tropo
--e git+https://github.com/washingtonpost/django-mongolier.git#egg=mongolier

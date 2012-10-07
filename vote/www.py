@@ -19,14 +19,18 @@ class Voter(object):
     data = None
 
     def run(self, request):
-        if request.method == "GET":
-            context = {}
-            return render_template('index.html', **context)
 
         if request.method == "POST":
             self.data = self.get_request(request)
             self.set_basic_params()
             self.state = self.determine_state()
+            
+            if self.sms_text == 'clear':
+                self.connection.api.find_and_modify(
+                    query={"user_id":self.user_id},
+                    update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                    upsert=True)
+                return 'cleared'
 
             if self.state == 0:
                 self.connection.api.find_and_modify(
@@ -49,21 +53,26 @@ class Voter(object):
             if self.state == 2:
                 tropo = Tropo()
                 
+                #TODO:SERDAR, get the state phone number
+                state_phone_number = "313-555-1212"
+                
                 if "y" in self.sms_text.lower():
                     # This is where we check if you have a driver license.
                     self.connection.api.find_and_modify(
                         query={"user_id":self.user_id},
                         update={"user_id":self.user_id,"state":0, "geographic_state":None},
                         upsert=True)
-                    tropo.say("Congratulations, %s! You can vote! Call (555) 555-5555 for more information." % self.user_id)
+                    tropo.say("Congratulations, %s! You can vote! Call %s for more information." % state_phone_number)
                 
                 elif "n" in self.sms_text.lower():
                     # This is where we check if the voter registration has passed.
+                    #TODO:SERDAR, has my deadline passed?
+                    
                     self.connection.api.find_and_modify(
                         query={"user_id":self.user_id},
                         update={"user_id":self.user_id,"state":0, "geographic_state":None},
                         upsert=True)
-                    tropo.say("Your voter registration date has passed, %s. We has a sad." % self.user_id)
+                    tropo.say("You can\'t vote. The deadline for registering to vote has passed. Call %s with further questions." % state_phone_number)
                 
                 else:
                     # We didn't get a yes or a no from the user.
