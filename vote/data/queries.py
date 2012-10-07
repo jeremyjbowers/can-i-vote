@@ -76,6 +76,7 @@ class QueryAPI(object):
         False
 
         """
+        state = state.upper()
         tbl = self.meta.tables['id_required']
         query = select([tbl.c.voter_id_state], tbl.c.state_postal == state)
         return bool(self.engine.execute(query).fetchone()[0])
@@ -87,6 +88,7 @@ class QueryAPI(object):
         u"State-issued driver's license"
 
         """
+        state = state.upper()
         tbl = self.meta.tables['rules']
         query = self.engine.execute(select([tbl.c.voter_identification_id, tbl.c.voter_identification_name], tbl.c.state == state))
         data = sorted([(int(row[0]), row[1]) for row in query.fetchall()])
@@ -99,6 +101,7 @@ class QueryAPI(object):
         u'Existing law:'
 
         """
+        state = state.upper()
         tbl = self.meta.tables['rules_if_no_id']
         query = select([tbl.c.acceptable_forms_of_id], tbl.c.state_postal == state)
         return self.engine.execute(query).fetchone()[0]

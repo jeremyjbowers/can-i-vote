@@ -59,13 +59,11 @@ class Voter(object):
                 
                 if "yes" in self.sms_text.lower():
                     #is this a voter id state?
-                    #TODO:SERDAR, tell my if this state is a voter id state
-                    voter_id_state = False
                     
-                    if voter_id_state:
+                    if api.is_id_required(geographic_state):
                         #yes, then we ask for forms of ID
                         #TODO:SERDAR, what's the first valid form of ID?
-                        first_valid_id = "Muppet hunting license"
+                        first_valid_id = api.primary_form_of_id(geographic_state)
                         
                         self.connection.api.find_and_modify(
                             query={"user_id":self.user_id},
@@ -105,6 +103,10 @@ class Voter(object):
                     # We didn't get a yes or a no from the user.
                     tropo.say("We didn't understand your response, %s. Please respond with yes or no." % self.user_id)
                 
+                return tropo.RenderJson()
+                
+            else:
+                tropo.say("Sorry, we're not done with this part.")
                 return tropo.RenderJson()
 
     def set_basic_params(self):

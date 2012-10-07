@@ -79,7 +79,7 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a state-issued driver\'s license?"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a State-issued driver\'s license?"}}]}')
 
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
@@ -102,7 +102,7 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a state-issued driver\'s license?"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a State-issued driver\'s license?"}}]}')
 
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"no"}}'
@@ -130,7 +130,7 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a state-issued driver\'s license?"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have a State-issued driver\'s license?"}}]}')
 
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"no"}}'
