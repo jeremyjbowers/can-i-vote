@@ -106,6 +106,7 @@ class Voter(object):
                 return tropo.RenderJson()
                 
             else:
+                tropo = Tropo()
                 tropo.say("Sorry, we're not done with this part.")
                 return tropo.RenderJson()
 
