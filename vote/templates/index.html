@@ -7,6 +7,10 @@
             text-align:center;
         }
         .hero-helper {
+            font-size: 14px;
+            font-style: italic;
+            text-align:center;
+            margin:15px 0 0;
             display:none;
         }
         body {
@@ -33,8 +37,18 @@
             color:#D33682;
             font-weight:bold;
         }
+        
+        img {
+            width: 70%;
+            border: 5px solid white;
+            margin: 0 auto 25px;
+        }
+        .big {
+            font-size:1.8em;
+            line-height:1em;
+        }
         .what-is-this {
-            margin:40px auto 0;
+            margin:30px auto 0;
             max-width:400px;
             padding: 0 20px;
             line-height:1.4em;
@@ -46,8 +60,6 @@
             }
             .hero-helper {
                 display:block;
-                text-align:center;
-                margin:15px 0 0;
             }
             .hero-helper a {
                 color:#fdf6e3;
@@ -57,13 +69,25 @@
     </style>
     </head>
     <body>
-        <div class="hero">Text <code>vote</code> to <a href="sms:+12027385185"><nobr>(202) 738-5185</nobr></a></div>
-        <div class="hero-helper"><a href="sms:+12027385185">(On your mobile? Tap this to text us!)</a></div>
+        <h1 class="hero">Text <code>vote</code> to <br/><a href="sms:+12027385185"><nobr>(202) 738-5185</nobr></a></h1>
+        <p class="hero-helper"><a href="sms:+12027385185">On your mobile? Tap this to text us!</a></p>
         <div class="what-is-this">
             <p>We're here to answer a not-so-simple question: <em>Can I vote in the 2012 election?</em></p>
             <p>Data used in this application came from <a href="http://www.ncsl.org/legislatures-elections/elections/voter-id.aspx">The National Council of State Legislatures</a>, NPR's <a href="http://apps.npr.org/early-voting-2012/">early voting app</a> and the <a href="http://data.votinginfoproject.org/rotr/CSV/">Voting Info Project</a>.</p>
             <p>Can I vote? was created by Jason Bartz, Jeremy Bowers, Brian Boyer, Carlos Linares and Serdar Tumgoren while attending <a href="http://www.electionhackathon.com/">Election Hackathon 2012</a>.</p>
             <p>The code is <a href="https://github.com/jeremyjbowers/can-i-vote">on GitHub</a>.</p>
+
+            <p class="big">Confused?</p>
+            <img src="images/boyer.gif"/>
+            <p class="big">Just text us...</p>
+            <img src="images/img-2.JPG"/>
+            <p class="big">Answer some questions...</p>
+            <img src="images/img-3.JPG"/>
+            <img src="images/img-5.JPG"/>
+            <img src="images/img-7.JPG"/>
+            <p class="big">And puppies and rainbows.</p>
+            <img src="images/boyer_3_happy.jpg"/>
+
             <p><em>BTW: This is not edited or ready for actual use. It is, at best, a demo.</em></p>
         </div>
     </body>
