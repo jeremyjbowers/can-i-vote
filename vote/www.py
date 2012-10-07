@@ -56,15 +56,33 @@ class Voter(object):
                 #TODO:SERDAR, get the state phone number
                 state_phone_number = "313-555-1212"
                 
-                if "y" in self.sms_text.lower():
-                    # This is where we check if you have a driver license.
-                    self.connection.api.find_and_modify(
-                        query={"user_id":self.user_id},
-                        update={"user_id":self.user_id,"state":0, "geographic_state":None},
-                        upsert=True)
-                    tropo.say("Congratulations, %s! You can vote! Call %s for more information." % state_phone_number)
+                if "yes" in self.sms_text.lower():
+                    #is this a voter id state?
+                    #TODO:SERDAR, tell my if this state is a voter id state
+                    voter_id_state = False
+                    
+                    if voter_id_state:
+                        #yes, then we ask for forms of ID
+                        #TODO:SERDAR, what's the first valid form of ID?
+                        first_valid_id = "Muppet hunting license"
+                        
+                        self.connection.api.find_and_modify(
+                            query={"user_id":self.user_id},
+                            update={"user_id":self.user_id,"state":3,"geographic_state":self.sms_text},
+                            upsert=True)
+                        tropo = Tropo()
+                        tropo.say("Do you have a %s?" % (first_valid_id))
+                        return tropo.RenderJson()
+                        
+                    else:                    
+                        #no, then they can vote
+                        self.connection.api.find_and_modify(
+                            query={"user_id":self.user_id},
+                            update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                            upsert=True)
+                        tropo.say("Congratulations, %s! You can vote! Call %s for more information." % state_phone_number)
                 
-                elif "n" in self.sms_text.lower():
+                elif "no" in self.sms_text.lower():
                     # This is where we check if the voter registration has passed.
                     #TODO:SERDAR, has my deadline passed?
                     
