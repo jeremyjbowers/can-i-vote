@@ -106,6 +106,10 @@ class Voter(object):
                 return tropo.RenderJson()
                 
             else:
+                self.connection.api.find_and_modify(
+                    query={"user_id":self.user_id},
+                    update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                    upsert=True)
                 tropo = Tropo()
                 tropo.say("Sorry, we're not done with this part.")
                 return tropo.RenderJson()
