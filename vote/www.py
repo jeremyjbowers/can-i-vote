@@ -6,6 +6,7 @@ from flask import render_template, request
 from tropo import Tropo
 import json
 from mongolier import Connection
+from vote.data import api
 
 app = Flask(__name__)
 
@@ -54,7 +55,8 @@ class Voter(object):
                 tropo = Tropo()
                 
                 #TODO:SERDAR, get the state phone number
-                state_phone_number = "313-555-1212"
+                geographic_state = self.get_geographic_state()
+                state_phone_number = api.elec_agency_phone(geographic_state)
                 
                 if "yes" in self.sms_text.lower():
                     #is this a voter id state?
@@ -120,6 +122,19 @@ class Voter(object):
             return state['state']
         else:
             return 0
+            
+    def get_geographic_state(self):
+        """
+        Get this user and determine their state.
+        """
+        # Find this user.
+        state = self.connection.api.find_one({"user_id":self.user_id})
+
+        # If they have a state, return it. Otherwise, return nothing.
+        if state:
+            return state['geographic_state']
+        else:
+            return ""
 
 @app.route('/helloworld.json', methods=['GET', 'POST'])
 def hello():
