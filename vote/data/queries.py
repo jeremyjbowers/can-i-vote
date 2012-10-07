@@ -34,10 +34,25 @@ class QueryAPI(object):
             return False
         deadline = self.engine.execute(query).fetchone()[0]
         
-        if deadline < datetime.date.today():
+        if deadline > datetime.date.today():
             return True
         else:
             return False
+            
+    def get_voting_deadline(self, state):
+        """
+        >>> from vote.data import api
+        >>> api.has_voting_deadline_passed('CA')
+        True
+
+        """
+        tbl = self.meta.tables['voting_cal']
+        query = select([tbl.c.registration_deadline], tbl.c.state_postal == state)
+        # Short circuit if state is North Dakota, which has no registration deadline
+        if state == 'ND':
+            return False
+        deadline = self.engine.execute(query).fetchone()[0]
+        return deadline
 
     def elec_agency_phone(self, state):
         """

@@ -54,7 +54,6 @@ class Voter(object):
             if self.state == 2:
                 tropo = Tropo()
                 
-                #TODO:SERDAR, get the state phone number
                 geographic_state = self.get_geographic_state()
                 state_phone_number = api.elec_agency_phone(geographic_state)
                 
@@ -82,17 +81,25 @@ class Voter(object):
                             query={"user_id":self.user_id},
                             update={"user_id":self.user_id,"state":0, "geographic_state":None},
                             upsert=True)
-                        tropo.say("Congratulations, %s! You can vote! Call %s for more information." % state_phone_number)
+                        tropo.say("You can vote! Call %s for more information." % state_phone_number)
                 
                 elif "no" in self.sms_text.lower():
                     # This is where we check if the voter registration has passed.
-                    #TODO:SERDAR, has my deadline passed?
+                    still_time_to_register = api.has_voting_deadline_passed(geographic_state)
+                    deadline_to_register = api.get_voting_deadline(geographic_state)
                     
-                    self.connection.api.find_and_modify(
-                        query={"user_id":self.user_id},
-                        update={"user_id":self.user_id,"state":0, "geographic_state":None},
-                        upsert=True)
-                    tropo.say("You can\'t vote. The deadline for registering to vote has passed. Call %s with further questions." % state_phone_number)
+                    if still_time_to_register:
+                        self.connection.api.find_and_modify(
+                            query={"user_id":self.user_id},
+                            update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                            upsert=True)
+                        tropo.say("You still have time to register to vote. The deadline to register is %s. Call %s to learn how to register." % (deadline_to_register,state_phone_number))
+                    else:
+                        self.connection.api.find_and_modify(
+                            query={"user_id":self.user_id},
+                            update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                            upsert=True)
+                        tropo.say("You can\'t vote. The deadline for registering to vote has passed. Call %s with further questions." % state_phone_number)
                 
                 else:
                     # We didn't get a yes or a no from the user.
