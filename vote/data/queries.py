@@ -27,6 +27,7 @@ class QueryAPI(object):
         True
 
         """
+        state = state.upper()
         tbl = self.meta.tables['voting_cal']
         query = select([tbl.c.registration_deadline], tbl.c.state_postal == state)
         # Short circuit if state is North Dakota, which has no registration deadline
@@ -46,6 +47,7 @@ class QueryAPI(object):
         True
 
         """
+        state = state.upper()
         tbl = self.meta.tables['voting_cal']
         query = select([tbl.c.registration_deadline], tbl.c.state_postal == state)
         # Short circuit if state is North Dakota, which has no registration deadline
@@ -59,6 +61,7 @@ class QueryAPI(object):
         >>> from vote.data import api
         >>> api.elec_agency_phone('CA')
         """
+        state = state.upper()
         tbl = self.meta.tables['voting_cal']
         query = select([tbl.c.sos_phone], tbl.c.state_postal == state)
         return self.engine.execute(query).fetchone()[0]
