@@ -34,7 +34,7 @@ class Voter(object):
                     update={"user_id":self.user_id,"state":1,"geographic_state":None},
                     upsert=True)
                 tropo = Tropo()
-                tropo.say("Hello, %s! What state do you live in?" % self.user_id)
+                tropo.say("Hello! What state do you live in?")
                 return tropo.RenderJson()
 
             if self.state == 1:
@@ -43,7 +43,7 @@ class Voter(object):
                     update={"user_id":self.user_id,"state":2,"geographic_state":self.sms_text},
                     upsert=True)
                 tropo = Tropo()
-                tropo.say("Hi, %s! Are you registered to vote in %s?" % (self.user_id, self.sms_text))
+                tropo.say("Are you registered to vote in %s?" % (self.sms_text))
                 return tropo.RenderJson()
 
             if self.state == 2:
