@@ -15,7 +15,7 @@ def load_voter_id_rules():
     print STATE_SLUGS_REGEX
     sqlite_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../data')
     data_dir = os.path.join(sqlite_dir, 'rotr')
-    cnx = sqlite3.connect(os.path.join(sqlite_dir, 'canivote.sqlite'))
+    cnx = sqlite3.connect(os.path.join(sqlite_dir, 'db.sqlite'))
     cursor = cnx.cursor()
     # Create rules table if it doesn't exist
     try:
