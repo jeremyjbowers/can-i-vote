@@ -61,7 +61,7 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote!"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote! Call (334) 242-7210 for more information."}}]}')
         
     def test_can_vote_registered_voter_id_has_drivers_license(self):
         #Alaska
@@ -84,7 +84,7 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote!"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote! Call (907) 375-6400 for more information."}}]}')
 
     def test_can_vote_registered_voter_id_no_drivers_license_yes_other_id(self):
         #Arizona
@@ -107,12 +107,12 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"no"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have any of these? Valid Arizona driver\'s license; Valid Arizona non-driver identification; Tribal enrollment card or other form of tribal identification; Valid U.S. federal, state or local government issued identification; Utility bill dated within 90 days of the election; Bank or credit union statement dated within 90 days of the election; Valid Arizona vehicle registration; Indian census card; Property tax statement; Vehicle insurance card; Recorder’s Certificate"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have any of these? Valid Arizona driver\'s license; Valid Arizona non-driver identification; Tribal enrollment card or other form of tribal identification; Valid U.S. federal, state or local government issued identification; Utility bill dated within 90 days of the election; Bank or credit union statement dated within 90 days of the election; Valid Arizona vehicle registration; Indian census card; Property tax statement; Vehicle insurance card; Recorder\'s Certificate"}}]}')
 
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"yes"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote!"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can vote! Call (602) 542-4285 for more information."}}]}')
 
     def test_can_vote_registered_voter_id_no_drivers_license_or_other_id(self):
         #Arizona
@@ -135,9 +135,9 @@ class TestX(TestCase):
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"no"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have any of these? Valid Arizona driver\'s license; Valid Arizona non-driver identification; Tribal enrollment card or other form of tribal identification; Valid U.S. federal, state or local government issued identification; Utility bill dated within 90 days of the election; Bank or credit union statement dated within 90 days of the election; Valid Arizona vehicle registration; Indian census card; Property tax statement; Vehicle insurance card; Recorder’s Certificate"}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "Do you have any of these? Valid Arizona driver\'s license; Valid Arizona non-driver identification; Tribal enrollment card or other form of tribal identification; Valid U.S. federal, state or local government issued identification; Utility bill dated within 90 days of the election; Bank or credit union statement dated within 90 days of the election; Valid Arizona vehicle registration; Indian census card; Property tax statement; Vehicle insurance card; Recorder\'s Certificate"}}]}')
 
         #give it a yes or no
         p = '{"session":{"from":{"id":"12345"}, "initialText":"no"}}'
         r = requests.post('http://localhost:5000/vote.json',data=p)
-        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can\'t vote."}}]}')
+        self.assertEqual(r.text,u'{"tropo": [{"say": {"value": "You can\'t vote. Call (602) 542-4285 for more information."}}]}')
