@@ -19,14 +19,18 @@ class Voter(object):
     data = None
 
     def run(self, request):
-        if request.method == "GET":
-            context = {}
-            return render_template('index.html', **context)
 
         if request.method == "POST":
             self.data = self.get_request(request)
             self.set_basic_params()
             self.state = self.determine_state()
+            
+            if self.sms_text == 'clear':
+                self.connection.api.find_and_modify(
+                    query={"user_id":self.user_id},
+                    update={"user_id":self.user_id,"state":0, "geographic_state":None},
+                    upsert=True)
+                return 'cleared'
 
             if self.state == 0:
                 self.connection.api.find_and_modify(
