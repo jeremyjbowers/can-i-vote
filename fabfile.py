@@ -20,9 +20,9 @@ Commands
 """
 
 def git_pull(release):
-    with cd(env.path):
+    with cd(env.repo_path):
         run('git pull origin %s' % release)
 
 def restart():
-		with cd(env.path):
-			run('' % env)
+		with cd(env.repo_path):
+			run('utils/restart_gunicorn.sh')
