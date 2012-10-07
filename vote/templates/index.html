@@ -23,29 +23,31 @@
         }
         a {
             font-weight:bold;
-            color:#cb4b16;
+            color:#CB4B16;
             text-decoration:none;
         }
+        a:hover {
+            color:#2AA198;
+        }
         code {
-            color:#d33682;
+            color:#D33682;
             font-weight:bold;
         }
         .what-is-this {
-            margin-top:60px;
+            margin:40px auto 0;
             max-width:400px;
-            margin-left:auto;
-            margin-right:auto;
             padding: 0 20px;
             line-height:1.4em;
         }
         @media (max-width: 500px) {
             .hero {
-                font-size: 40px;
+                font-size: 54px;
+                margin:0 auto;
             }
             .hero-helper {
                 display:block;
                 text-align:center;
-                margin-top:-15px;
+                margin:15px 0 0;
             }
             .hero-helper a {
                 color:#fdf6e3;
@@ -55,8 +57,8 @@
     </style>
     </head>
     <body>
-        <p class="hero">Text <code>vote</code> to <a href="sms:+12027385185"><nobr>(202) 738-5185</nobr></a></p>
-        <p class="hero-helper"><a href="sms:+12027385185">(On your mobile? Tap this to text us!)</a></p>
+        <div class="hero">Text <code>vote</code> to <a href="sms:+12027385185"><nobr>(202) 738-5185</nobr></a></div>
+        <div class="hero-helper"><a href="sms:+12027385185">(On your mobile? Tap this to text us!)</a></div>
         <div class="what-is-this">
             <p>We're here to answer a not-so-simple question: <em>Can I vote in the 2012 election?</em></p>
             <p>Data used in this application came from <a href="http://www.ncsl.org/legislatures-elections/elections/voter-id.aspx">The National Council of State Legislatures</a>, NPR's <a href="http://apps.npr.org/early-voting-2012/">early voting app</a> and the <a href="http://data.votinginfoproject.org/rotr/CSV/">Voting Info Project</a>.</p>
