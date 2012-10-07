@@ -1,8 +1,11 @@
-#csvkit
+Fabric==1.4.3
 Flask==0.9
 Jinja2==2.6
 Werkzeug==0.8.3
--e git+https://github.com/tropo/tropo-webapi-python.git#egg=tropo
+pycrypto==2.6
+pymongo==2.3
+requests==0.14.1
+ssh==1.7.14
 wsgiref==0.1.2
+-e git+https://github.com/tropo/tropo-webapi-python.git#egg=tropo
 -e git+https://github.com/washingtonpost/django-mongolier.git#egg=mongolier
-requests
